@@ -91,7 +91,7 @@ class RNNModel(object):
         labels_one_hot = tf.one_hot(tf.reshape(self.labels, [-1]), depth=self.vocab_size)
         loss = tf.nn.softmax_cross_entropy_with_logits(labels=labels_one_hot, logits=self.outputs)
         total_loss = tf.reduce_mean(loss)
-        # 详见tf优化器
+        # 详见tf优化器博客和tf的APi
         train_op = tf.train.AdamOptimizer(learning_rate=self.lr).minimize(loss=loss)
         return train_op, total_loss
 
