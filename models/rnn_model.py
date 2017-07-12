@@ -87,8 +87,10 @@ class RNNModel(object):
         return logits, states
 
     def update(self):
-        # one_hot:
+        # one_hot: NLP的独热向量
         labels_one_hot = tf.one_hot(tf.reshape(self.labels, [-1]), depth=self.vocab_size)
+
+        # 交叉熵(信息论内容)
         loss = tf.nn.softmax_cross_entropy_with_logits(labels=labels_one_hot, logits=self.outputs)
         total_loss = tf.reduce_mean(loss)
         # 详见tf优化器博客和tf的APi
