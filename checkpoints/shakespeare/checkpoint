@@ -1,0 +1,2 @@
+model_checkpoint_path: "F:\\dataset\\tensorflow_novelist-master\\checkpoints\\shakespeare\\shakespeare-1020"
+all_model_checkpoint_paths: "F:\\dataset\\tensorflow_novelist-master\\checkpoints\\shakespeare\\shakespeare-1020"
