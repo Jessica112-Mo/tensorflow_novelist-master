@@ -79,7 +79,7 @@ class RNNModel(object):
         outputs, states = tf.nn.dynamic_rnn(cell_wrapped, inputs=inputs, dtype=tf.float32, initial_state=initial_state)
         outputs = tf.reshape(outputs, [int(outputs.get_shape()[0]), int(inputs.get_shape()[1])])
 
-        # truncated_normal : 截断分布
+        # truncated_normal : 截断分布，详见高斯分布
         w = tf.Variable(tf.truncated_normal([int(inputs.get_shape()[1]), self.vocab_size]))
         b = tf.Variable(tf.zeros([self.vocab_size]))
 
@@ -87,9 +87,11 @@ class RNNModel(object):
         return logits, states
 
     def update(self):
+        # one_hot:
         labels_one_hot = tf.one_hot(tf.reshape(self.labels, [-1]), depth=self.vocab_size)
         loss = tf.nn.softmax_cross_entropy_with_logits(labels=labels_one_hot, logits=self.outputs)
         total_loss = tf.reduce_mean(loss)
+        # 详见tf优化器
         train_op = tf.train.AdamOptimizer(learning_rate=self.lr).minimize(loss=loss)
         return train_op, total_loss
 
