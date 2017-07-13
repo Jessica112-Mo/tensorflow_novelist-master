@@ -88,6 +88,9 @@ class RNNModel(object):
 
     def update(self):
         # one_hot: NLP的独热向量
+        # Word2Vec杀一个典型的预测模型，用于高效的学习Word Embedding. 实现的模型有两种
+        # 连续词袋模型(CBOW) 和 Skip-Gram模型
+        # 建立字典，每个词生成one-hot向量。
         labels_one_hot = tf.one_hot(tf.reshape(self.labels, [-1]), depth=self.vocab_size)
 
         # 交叉熵(信息论内容)
